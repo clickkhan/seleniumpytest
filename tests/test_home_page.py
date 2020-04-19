@@ -1,6 +1,7 @@
 from pageObjects.home_page import HomePage
 from utilities.Base import BaseClass
 
+
 class TestHomePage(BaseClass):
 
     def test_cookie(self):
