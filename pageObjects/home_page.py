@@ -1,11 +1,8 @@
-from selenium import webdriver
-import pytest
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 
-#@pytest.mark.usefixtures("setup")
+
 class HomePage:
 
     cookie_banner = (By.ID, "onetrust-banner-sdk")
@@ -36,24 +33,3 @@ class HomePage:
 
     def get_statsguru_link(self):
         return self.wait.until(EC.presence_of_element_located(HomePage.stats_guru_link))
-
-    # def confirmCookieBanner(self):
-    #     self.wait.until(EC.presence_of_element_located((By.ID, "onetrust-banner-sdk")))
-    #     cookie_banner = self.driver.find_element_by_id("onetrust-accept-btn-handler")
-    #     cookie_banner.click()
-    #
-    # def selectStatsGuru(self):
-    #     action = ActionChains(self.driver)
-    #     nav_bar = self.driver.find_element_by_id("global-nav")
-    #     self.wait.until(EC.presence_of_element_located((By.LINK_TEXT, "Stats")))
-    #     stats_menu = nav_bar.find_element_by_link_text("Stats")
-    #     action.move_to_element(stats_menu).perform()
-    #     self.wait.until(EC.presence_of_element_located((By.LINK_TEXT, "Statsguru")))
-    #     statsguru = self.driver.find_element_by_link_text("Statsguru")
-    #     action.move_to_element(statsguru).perform()
-    #     statsguru.click()
-
-# if __name__ == "__main__":
-#     homepage = HomePage()
-#     homepage.confirmCookieBanner()
-#     homepage.selectStatsGuru
