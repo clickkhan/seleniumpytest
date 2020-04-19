@@ -4,8 +4,7 @@ from pageObjects.home_page import HomePage
 
 @pytest.mark.usefixtures("setup")
 class BaseClass:
-    #pass
-    #driver = self.setup
+
     def hover_element(self, element):
         #homepage = HomePage(self.driver)
         action = ActionChains(self.driver)
