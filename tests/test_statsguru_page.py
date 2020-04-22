@@ -20,6 +20,7 @@ def setup(request):
 class TestStatsGuruPage(BaseClass):
 
     def test_player_input(self):
+        log = self.getlogger()
         statsguru = StatsGuruPage(self.driver)
         #self.driver.implicitly_wait(15)
         text_input = statsguru.get_text_box()
@@ -34,13 +35,23 @@ class TestStatsGuruPage(BaseClass):
         statsguru.get_stats_links().click()
 
     def test_stats_query(self):
+        lst = []
+        log = self.getlogger()
         statsguru = StatsGuruPage(self.driver)
         self.select_dropdown_element(self.driver, statsguru.opposition_team_dropdown, "India").click()
+        #log.info("Here is the label: ", self.select_checkbox(self.driver, statsguru.venue_label, "away (home of opposition)"))
         statsguru.select_venue().click()
         #venue = self.select_checkbox(self.driver, statsguru.venue_label, "away (home of opposition)")
         #venue.click()
+        #log.info("The new thing is that")
         self.select_dropdown_element(self.driver, statsguru.ground_dropdown, "all grounds").click()
         self.select_dropdown_element(self.driver, statsguru.host_country_dropdown, "India").click()
         self.select_dropdown_element(self.driver, statsguru.seasons_dropdown, "all seasons").click()
         self.select_radiobtn(self.driver, statsguru.view_format_label, "Batting formats").click()
         statsguru.submit_query().click()
+        log.info(statsguru.career_avg_table(statsguru.career_avg_head, statsguru.career_avg_title_rows))
+        log.info(statsguru.career_avg_table(statsguru.career_avg_unfiltered_data, statsguru.career_avg_data_rows))
+        lst.append(tuple(statsguru.career_avg_table(statsguru.career_avg_head, statsguru.career_avg_title_rows)))
+        lst.append(tuple(statsguru.career_avg_table(statsguru.career_avg_unfiltered_data, statsguru.career_avg_data_rows)))
+        lst.append(tuple(statsguru.career_avg_table(statsguru.career_avg_filtered_data, statsguru.career_avg_data_rows)))
+        self.write_excel_sheet(lst)
