@@ -46,7 +46,7 @@ class BaseClass:
         return logger
 
     def write_excel_sheet(self, lst):
-        workbook = openpyxl.load_workbook('Player Stats.xlsx')
+        workbook = openpyxl.Workbook()
         worksheet = workbook.active
         row, col = 1, 1
         for item in lst:

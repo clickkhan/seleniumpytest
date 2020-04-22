@@ -25,7 +25,7 @@ class StatsGuruPage:
 
     def __init__(self, driver):
         self.driver = driver
-        self.wait = WebDriverWait(self.driver, 25)
+        self.wait = WebDriverWait(self.driver, 15)
 
     def get_cookie_visibility(self):
         return self.wait.until(EC.element_to_be_clickable(StatsGuruPage.cookie_confirm_btn))
