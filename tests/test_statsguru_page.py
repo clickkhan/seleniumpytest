@@ -20,7 +20,7 @@ def setup(request):
 class TestStatsGuruPage(BaseClass):
 
     def test_player_input(self):
-        log = BaseClass.getlogger()
+        log = self.getlogger()
         statsguru = StatsGuruPage(self.driver)
         #self.driver.implicitly_wait(15)
         text_input = statsguru.get_text_box()

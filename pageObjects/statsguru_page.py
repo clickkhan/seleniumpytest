@@ -17,10 +17,15 @@ class StatsGuruPage:
     seasons_dropdown = (By.CSS_SELECTOR, 'select[name="season"]')
     view_format_label = (By.CSS_SELECTOR, 'label[class="guruRadioLabel"]')
     submit_btn = (By.CSS_SELECTOR, 'input[value="Submit query"]')
+    career_avg_head = (By.CSS_SELECTOR, 'table tr[class="head"]')
+    career_avg_title_rows = (By.TAG_NAME, 'th')
+    career_avg_unfiltered_data = (By.XPATH, '//table[3]//tbody[1]')
+    career_avg_filtered_data = (By.XPATH, '//table[3]//tbody[2]//tr[1]')
+    career_avg_data_rows = (By.TAG_NAME, 'td')
 
     def __init__(self, driver):
         self.driver = driver
-        self.wait = WebDriverWait(self.driver, 20)
+        self.wait = WebDriverWait(self.driver, 25)
 
     def get_cookie_visibility(self):
         return self.wait.until(EC.element_to_be_clickable(StatsGuruPage.cookie_confirm_btn))
@@ -53,9 +58,22 @@ class StatsGuruPage:
         #venues = self.wait.until(EC.presence_of_all_elements_located(StatsGuruPage.venue_check_box))
         venues = self.driver.find_elements(*StatsGuruPage.venue_label)
         for venue in venues:
-            print(venue.text)
+            #print(venue.text)
             if venue.text == "away (home of opposition)":
                 return venue
 
     def submit_query(self):
         return self.driver.find_element(*StatsGuruPage.submit_btn)
+
+    def career_avg_table(self, head_element, row_element):
+        #headline = self.wait.until(EC.presence_of_element_located(StatsGuruPage.career_avg_head))
+        #rows = headline.find_elements(*StatsGuruPage.career_avg_rows)
+        headline = self.wait.until(EC.presence_of_element_located(head_element))
+        rows = headline.find_elements(*row_element)
+        #rows = headline
+        data = []
+        for row in rows:
+            #print(row.get_attribute("title"))
+            #data.append(row.get_attribute("title"))
+            data.append(row.text)
+        return data
