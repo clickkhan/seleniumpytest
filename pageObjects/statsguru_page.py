@@ -50,7 +50,8 @@ class StatsGuruPage:
 
     def get_stats_links(self):
         #links = self.driver.find_elements(*StatsGuruPage.stats_links)
-        for link in self.driver.find_elements(*StatsGuruPage.stats_links):
+        for link in self.wait.until(EC.presence_of_all_elements_located(StatsGuruPage.stats_links)):
+        #for link in self.driver.find_elements(*StatsGuruPage.stats_links):
             if link.text == "Test matches player":
                 return link
 
